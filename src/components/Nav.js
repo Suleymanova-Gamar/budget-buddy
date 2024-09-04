@@ -1,0 +1,55 @@
+import { useRef, useEffect } from 'react';
+import fullLogo from '../assets/img/logo-full/1.svg';
+import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import FlipCard from './FlipCard';
+import { useMediaQuery } from 'react-responsive';
+import { setNavHeight } from '../features/mainSlice';
+import { useDispatch, useSelector } from 'react-redux';
+export default function Nav({ isDashPage }) {
+  const dispatch = useDispatch();
+  const registerFormActive = useSelector(state => state.authForm.registerFormActive);
+  const isTablet = useMediaQuery({ query: '(max-width: 992px)' });
+  const authRegFormHeight = useSelector(state => state.authForm.authRegFormHeight);
+  const authLoginFormHeight = useSelector(state => state.authForm.authLoginFormHeight);
+  
+  const navbarRef = useRef(null);
+  useEffect(() => {
+    if (navbarRef.current) {
+      dispatch(setNavHeight(navbarRef.current.offsetHeight));
+    }
+  }, [navbarRef, dispatch]);
+    return (
+      <nav
+        ref={navbarRef}
+        className="w-100 position-absolute top-0 pt_12px z_index_1"
+    >
+      <div className='container-xxl'>
+          {isDashPage ?
+            ''
+            : (
+              <div className='row justify-content-between justify-content-lg-center'>
+                <div className='col-auto'>
+                  <img className='w-auto h-100 object-fit-contain' src={fullLogo} alt='BudgetBuddy' />
+                </div>
+                {isTablet && (
+                  <div className='col-auto'>
+                    <button className="default_btn c_darkBlue h4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                      <FontAwesomeIcon icon={faRightToBracket} />
+                    </button>
+                    <div
+                      className="offcanvas  offcanvas-top border-bottom-0 transition_default custom_backdrop bg-transparent"
+                      tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel"
+                      style={{'--bs-offcanvas-height': `${registerFormActive? authRegFormHeight: authLoginFormHeight}px`}}>
+                      <div className="offcanvas-body p-0 overflow_unset">
+                        <FlipCard />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+      </div>
+    </nav>
+  );
+}
