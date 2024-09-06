@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import fullLogo from '../assets/img/logo-full/1.svg';
+import miniLogo from '../assets/img/logo-mini/img.svg';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FlipCard from './FlipCard';
@@ -30,12 +31,16 @@ export default function Nav({ isDashPage }) {
             : (
               <div className='row justify-content-between justify-content-lg-center'>
                 <div className='col-auto'>
-                  <img className='w-auto h-100 object-fit-contain' src={fullLogo} alt='BudgetBuddy' />
+                  {isTablet? 
+                    <img className='w-auto h-100 object-fit-contain' src={miniLogo} alt='BudgetBuddy' />
+                    :
+                    <img className='w-auto h-100 object-fit-contain' src={fullLogo} alt='BudgetBuddy' />
+                  }
                 </div>
                 {isTablet && (
                   <div className='col-auto'>
-                    <button className="default_btn c_darkBlue h4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                      <FontAwesomeIcon icon={faRightToBracket} />
+                    <button className="default_btn c_darkBlue h4 flex_center gap-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                      <span className="h5">{registerFormActive? 'Register': 'Login'}</span> <FontAwesomeIcon icon={faRightToBracket} />
                     </button>
                     <div
                       className="offcanvas  offcanvas-top border-bottom-0 transition_default custom_backdrop bg-transparent"
