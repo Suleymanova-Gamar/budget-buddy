@@ -12,6 +12,7 @@ import { useMediaQuery } from 'react-responsive';
 import { useSelector } from 'react-redux';
 
 export default function Home() {
+    const sliderRef = useRef(null);
     const navbarHeight = useSelector(state => state.main.navHeight);
     const isTablet = useMediaQuery({ query: '(max-width: 992px)' });
     const [bannerTextHeights, setBannerTextHeights] = useState([]);
@@ -23,21 +24,21 @@ export default function Home() {
     };
 
     useEffect(() => {
-        updateBannerTextHeights();  // Initial height update
-    }, []);
+        updateBannerTextHeights();
+    }, []);    
 
     const settings = {
         fade: true,
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplay: true,
-        infinite: false,
-        speed: (37*(50 * 2)) + 500,// Slide transition duration
-        autoplaySpeed: (37*(50 * 2)) + 500,// Each slide will be shown for this amount of time before automatically transitioning to the next slide
-        // not slidable by user, just auto
-        draggable: false,
-        swipe: false,
-        arrows: false,
+        speed: 3600,// Slide transition duration
+        // onInit: () => {
+        //     // Capture the date and time when the slider initializes
+        //     setSliderState(true);
+        // }
+    };
+    const goToSlide = (index) => {
+        sliderRef.current.slickGoTo(index); // Go to a specific slide
     };
     
     return (
@@ -55,7 +56,7 @@ export default function Home() {
                         <div className='container-fluid px-0'>
                             <div className='row flex-md-row-reverse align-items-lg-center'>
                                 <div className='col-lg-8'>
-                                    <Slider {...settings}>
+                                    <Slider {...settings} ref={sliderRef}>
                                         {imgs.map((item, index) => (
                                             <div key={index}>
                                                 <div>
@@ -80,19 +81,20 @@ export default function Home() {
                                 >
                                     <TypeAnimation
                                         sequence={[
-                                            imgs[0].text, // text=
-                                            imgs[0].delay,
-
-                                            imgs[1].text, // text
-                                            imgs[1].delay,
-
-                                            imgs[2].text, // text
-                                            (imgs[2].delay),
+                                            () => goToSlide(0),
+                                            imgs[0].text, 
+                                            2000,
+                                            () => goToSlide(1),
+                                            imgs[1].text, 
+                                            2000,
+                                            () => goToSlide(2),
+                                            imgs[2].text, 
+                                            2000,
 
                                         ]}
                                         wrapper="h4"
                                         speed={50}
-                                        repeat={0}
+                                        repeat={Infinity}
                                         className={`c_darkBlue shadow_Tmain ${isTablet && 'text-center'}`}
                                     />
                                 </div>

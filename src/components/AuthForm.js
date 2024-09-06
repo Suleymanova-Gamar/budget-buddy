@@ -7,10 +7,33 @@ export default function AuthForm({ isLogin }) { // isLogin defines if it's a log
     return (
         <form className={`${isLogin? 'login_form': 'register_form'} d-flex flex-column gap_24px`}>
             <div className='input_group d-flex flex-column gap_18px'>
-                {!isLogin&& <Input type='text' placeholder='Full Name' />}
-                <Input type='text' placeholder='Email' />
-                <Input type='password' placeholder='Password' />
-                {!isLogin&& <Input type='password' placeholder='Confirm Password' />}
+                {!isLogin&& (
+                    <Input 
+                    type='text'
+                    placeholder='Full Name'
+                    name={`${isLogin?"login_fullName": "register_fullName"}`}
+                    autocomplete="full name" />
+                )}
+                <Input 
+                    type='text'
+                    placeholder='Email'
+                    id={`${isLogin?"login_email": "register_email"}`}
+                    name={`${isLogin?"login_email": "register_email"}`}
+                    autocomplete="email" />
+                <Input 
+                    type='password'
+                    placeholder='Password'
+                    id={`${isLogin?"login_password": "register_password"}`}
+                    name={`${isLogin?"login_password": "register_password"}`}
+                    autocomplete={`${isLogin?"current-password": 'new-password' }`}/>
+                {!isLogin&& (
+                    <Input 
+                    type='password'
+                    placeholder='Confirm Password'
+                    id={`${isLogin?"login_confPass": "register_confPass"}`}
+                    name={`${isLogin?"login_confPass": "register_confPass"}`}
+                    autocomplete="new-password" />
+                )}
             </div>
             <button
                 type='button'
