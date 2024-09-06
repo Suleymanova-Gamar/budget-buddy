@@ -32,10 +32,6 @@ export default function Home() {
         slidesToShow: 1,
         slidesToScroll: 1,
         speed: 3600,// Slide transition duration
-        // onInit: () => {
-        //     // Capture the date and time when the slider initializes
-        //     setSliderState(true);
-        // }
     };
     const goToSlide = (index) => {
         sliderRef.current.slickGoTo(index); // Go to a specific slide
@@ -43,7 +39,8 @@ export default function Home() {
     
     return (
         <section
-            style={{ minHeight: '100vh' }}
+            // eslint-disable-next-line
+            style={{ minHeight: '100vh', minHeight: '100svh' }}
             className='d-flex flex-column position-relative overflow-hidden'
         >
             <Nav isDashPage={false}/>
