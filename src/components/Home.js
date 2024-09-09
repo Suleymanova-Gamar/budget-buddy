@@ -10,7 +10,7 @@ import { TypeAnimation } from 'react-type-animation';
 import FlipCard from './FlipCard';
 import { useMediaQuery } from 'react-responsive';
 import { useSelector } from 'react-redux';
-
+import useChangeOnResize from '../hooks/useChangeOnResize';
 export default function Home() {
     const sliderRef = useRef(null);
     const navbarHeight = useSelector(state => state.main.navHeight);
@@ -26,12 +26,8 @@ export default function Home() {
 
     useEffect(() => {
         updateBannerTextHeights();
-        // update also on resize
-        window.addEventListener('resize', updateBannerTextHeights);
-        return () => {
-            window.removeEventListener('resize', updateBannerTextHeights);
-        };
     }, []);
+    useChangeOnResize(updateBannerTextHeights)
 
     const settings = {
         fade: true,

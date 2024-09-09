@@ -10,7 +10,7 @@ import 'bootstrap/dist/js/bootstrap';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // custom styling
-import './assets/style/main.css';
+import './assets/style/main.scss';
 import store from './store/data';
 import { Provider } from 'react-redux';
 const root = ReactDOM.createRoot(document.getElementById('root'));

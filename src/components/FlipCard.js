@@ -20,6 +20,7 @@ export default function FlipCard() {
         dispatch(setAuthLoginFormHeight(authLoginFormRef.current.offsetHeight));
         // eslint-disable-next-line
     }, [authRegFormRef, authLoginFormRef]);
+    
 
     return (
         <div className={`flip-card ${registerFormActive? 'register_active': ''}`}>
