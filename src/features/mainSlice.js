@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     navHeight: 0,
+    userAuthorized: false
 };
 
 const mainSlice = createSlice({
@@ -10,7 +11,10 @@ const mainSlice = createSlice({
         setNavHeight: (state, action) => {
             state.navHeight = action.payload;
         },
+        setUserAuth: (state, action) => {
+            state.userAuthorized = action.payload;
+        },
     }
 });
-export const { setNavHeight } = mainSlice.actions;
+export const { setNavHeight, setUserAuth } = mainSlice.actions;
 export default mainSlice.reducer;

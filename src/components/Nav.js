@@ -7,9 +7,10 @@ import FlipCard from './FlipCard';
 import { useMediaQuery } from 'react-responsive';
 import { setNavHeight } from '../features/mainSlice';
 import { useDispatch, useSelector } from 'react-redux';
-export default function Nav({ isDashPage }) {
+export default function Nav() {
   const dispatch = useDispatch();
   const registerFormActive = useSelector(state => state.authForm.registerFormActive);
+  const userAuthorized = useSelector(state => state.main.userAuthorized)
   const isTablet = useMediaQuery({ query: '(max-width: 992px)' });
   const authRegFormHeight = useSelector(state => state.authForm.authRegFormHeight);
   const authLoginFormHeight = useSelector(state => state.authForm.authLoginFormHeight);
@@ -26,8 +27,8 @@ export default function Nav({ isDashPage }) {
         className="w-100 position-absolute top-0 pt_12px z_index_1"
     >
       <div className='container-xxl'>
-          {isDashPage ?
-            ''
+          {userAuthorized ?
+            <>Dashboard</>
             : (
               <div className='row justify-content-between justify-content-lg-center'>
                 <div className='col-auto'>

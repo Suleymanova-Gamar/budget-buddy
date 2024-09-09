@@ -7,9 +7,13 @@
     --mainGradient: linear-gradient(90deg,
             rgba(240, 242, 241, 0.16) 0%,
             rgba(58, 65, 86, 0.06) 96%);
+    --dangerGradient: linear-gradient(90deg,
+            rgba(95, 19, 33, 1) -32%,
+            rgba(197, 39, 68, 1) 24%);
     --danger: #C52744;
     --white: #ffffff;
     --mainShadow: 0px 4px 4px 0px rgba(58, 65, 86, 0.18);
+    --dangerShadow: 0px 4px 4px 0px rgba(197, 39, 68, 0.18);
     --mainShadowOnHover: 0px 0px 4px 0px rgba(58, 65, 86, 0.18);
     --mainTShadow: 4px 4px 4px rgba(58, 65, 86, 0.18);
     --dropShadow: 2px 2px 12px 1px rgba(0, 0, 0, 0.25);
@@ -39,6 +43,8 @@ h6, .h6 { font-size: var(--px21_33); }
 
 .text_md { font-size: 1rem; }
 .text_sm { font-size: var(--px12); }
+
+.fw_semiBold { font-weight: var(--semiBold); }
 /* flex */
 .flex_center {
     display: flex;
@@ -98,12 +104,21 @@ h6, .h6 { font-size: var(--px21_33); }
 .input_style {
     background: var(--mainGradient);
     box-shadow: var(--mainShadow);
+    border: none;
+    color: var(--darkBlue);
 }
 .input_style,
 .input_style:focus,
 .input_style:focus-visible,
-.input_style:hover,
-
+.input_style:hover {
+    outline: none;
+}
+.formControl[data-invalid] .chakra-form__error-message {
+    color: var(--danger);
+}
+.formControl[data-invalid] .input_style {
+    box-shadow: var(--dangerShadow);
+}
 .default_btn:hover,
 .default_btn:focus-visible,
 .default_btn:focus,
@@ -174,8 +189,7 @@ h6, .h6 { font-size: var(--px21_33); }
 }
 .flip-card-back { transform: rotateY(180deg); }
 /* colors */
-.c_darkBlue,
-.input_style { color: var(--darkBlue); }
+.c_darkBlue { color: var(--darkBlue); }
 .c_light { color: var(--light); }
 .c_main { color: var(--main); }
 
